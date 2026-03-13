@@ -9,7 +9,7 @@ makedepends=('npm' 'nodejs')
 source=("git+https://github.com/bomkz/xemubox-dashboard.git")
 sha256sums=("SKIP")
 srcname=xemubox-dashboard
-bin=xdash
+bin=xemubox-dashboard
 NODE_ENV=development 
 
 prepare(){
@@ -30,5 +30,5 @@ check() {
 
 package() {
 	cd "$srcname"
-	install -Dm755 "dist/xdash" "$pkgdir/usr/bin/xdash"
+	install -Dm755 "dist/$srcname" "$pkgdir/usr/bin/$srcname"
 }
