@@ -4,31 +4,28 @@ pkgrel=1
 pkgdesc='XemuBOX Dashboard, used by the XemuBOX as a game picker.'
 arch=('x86_64')
 url=https://github.com/bomkz/xemubox-dashboard
-license=('The Unlicense')
+license=('MIT')
 makedepends=('npm' 'nodejs')
-source=("git+https://github.com/bomkz/xemubox-dashboard.git")
-sha256sums=("SKIP")
-srcname=xemubox-dashboard
-bin=xemubox-dashboard
-NODE_ENV=development 
+depends=('fuse2' 'nss' 'libxss' 'libxtst' 'libxrandr' 'libxcomposite' 'libxdamage' 'libxkbcommon' 'gtk3')
+source=("xemubox-dashboard::git+https://github.com/bomkz/xemubox-dashboard.git")
+sha256sums=('SKIP')
 
-prepare(){
-	cd "$srcname"
-	mkdir -p build/
+prepare() {
+    cd "$srcdir/xemubox-dashboard"
+    mkdir -p build/
 }
 
-build(){
-	cd "$srcname"
-    npm install
-    npm run build:linux
+build() {
+    cd "$srcdir/xemubox-dashboard"
+    NODE_ENV=development npm install
+    NODE_ENV=development npm run build:linux
 }
-
 
 check() {
-	cd "$srcname"
+    cd "$srcdir/xemubox-dashboard"
 }
 
 package() {
-	cd "$srcname"
-	install -Dm755 "dist/$srcname" "$pkgdir/usr/bin/$srcname"
+    cd "$srcdir/xemubox-dashboard"
+    install -Dm755 "dist/xemubox-dashboard" "$pkgdir/usr/bin/xemubox-dashboard"
 }
